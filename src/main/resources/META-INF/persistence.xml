@@ -1,0 +1,66 @@
+<persistence version="2.2"
+             xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+     http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+
+    <persistence-unit name="refresh_test" transaction-type="RESOURCE_LOCAL">
+        <description>Mysql test case Persistence Unit</description>
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+
+        <properties>
+            <property name="hibernate.archive.autodetection" value="class, hbm"/>
+
+            <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
+            <property name="hibernate.connection.password" value="" />
+            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:63560/insidetrack" />
+            <property name="hibernate.connection.username" value="editor" />
+            <property name="hibernate.default_schema" value="insidetrack" />
+            <property name="hibernate.dialect.storage_engine" value="innodb" />
+
+<!--            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>-->
+<!--            <property name="hibernate.connection.driver_class" value="org.h2.Driver"/>-->
+<!--            <property name="hibernate.connection.url" value="jdbc:h2:mem:db1;DB_CLOSE_DELAY=-1"/>-->
+<!--            <property name="hibernate.connection.username" value="sa"/>-->
+
+<!--            <property name="hibernate.connection.pool_size" value="5"/>-->
+
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+
+            <property name="hibernate.max_fetch_depth" value="5"/>
+
+            <property name="hibernate.cache.region_prefix" value="hibernate.test"/>
+            <property name="hibernate.cache.region.factory_class"
+                      value="org.hibernate.testing.cache.CachingRegionFactory"/>
+
+            <!--NOTE: hibernate.jdbc.batch_versioned_data should be set to false when testing with Oracle-->
+            <property name="hibernate.jdbc.batch_versioned_data" value="true"/>
+
+            <property name="jakarta.persistence.validation.mode" value="NONE"/>
+            <property name="hibernate.service.allow_crawling" value="false"/>
+            <property name="hibernate.session.events.log" value="true"/>
+
+            <!-- All properties below this line do not exist in the hibernate-test-case-template -->
+
+<!--            <property name="hibernate.enhancer.enableDirtyTracking" value="true" />-->
+<!--            <property name="hibernate.enhancer.enableLazyInitialization" value="true" />-->
+            <!--
+              The following line (lazy_load_no_trans) affects the behavior.  Without it, I get this error:
+                  org.hibernate.LazyInitializationException: failed to lazily initialize a collection of role:
+                  org.example.Company.people: could not initialize proxy - no Session
+              With it, I get this error:
+                  jakarta.persistence.RollbackException: Error while committing the transaction
+                  Caused by: org.hibernate.PersistentObjectException: detached entity passed to persist: org.example.Person
+              The manual recommends not using this, and I agree that it is undesirable.
+              -->
+<!--            <property name="hibernate.enable_lazy_load_no_trans" value="true" />-->
+<!--            <property name="hibernate.ejb.use_class_enhancer" value="true" />-->
+
+            <property name="hibernate.cache.use_second_level_cache" value="false"/>
+        </properties>
+    </persistence-unit>
+</persistence>
